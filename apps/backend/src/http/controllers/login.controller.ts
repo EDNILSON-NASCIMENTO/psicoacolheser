@@ -25,7 +25,7 @@ export class LoginController {
     const params = req.body as LoginTypeDTO
     const response = await this.authenticateUseCase.execute(params)
     if(response.isLeft()){
-      ErroHandler.handle(response, res)
+      return ErroHandler.handle(response, res)
     }
     return res.status(200).send(response.value)
   }

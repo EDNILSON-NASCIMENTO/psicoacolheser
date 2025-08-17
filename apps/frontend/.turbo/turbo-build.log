@@ -1,0 +1,94 @@
+
+
+> frontend@1.0.0 build /home/alex/projects/psicoacolheser/apps/frontend
+> next build
+
+ [33m[1m⚠[22m[39m Warning: Found multiple lockfiles. Selecting /home/alex/projects/pnpm-lock.yaml.
+   Consider removing the lockfiles at:
+   * /home/alex/projects/psicoacolheser/pnpm-lock.yaml
+
+   [1m[38;2;173;127;168m▲ Next.js 15.4.6[39m[22m
+
+ [37m[1m [22m[39m Creating an optimized production build ...
+[Error: Can't resolve 'tailwindcss' in '/home/alex/projects/psicoacolheser/apps/frontend/src/app'] {
+  details: "resolve 'tailwindcss' in '/home/alex/projects/psicoacolheser/apps/frontend/src/app'\n" +
+    '  Parsed request is a module\n' +
+    '  using description file: /home/alex/projects/psicoacolheser/apps/frontend/package.json (relative path: ./src/app)\n' +
+    '    resolve as module\n' +
+    "      /home/alex/projects/psicoacolheser/apps/frontend/src/app/node_modules doesn't exist or is not a directory\n" +
+    "      /home/alex/projects/psicoacolheser/apps/frontend/src/node_modules doesn't exist or is not a directory\n" +
+    '      looking for modules in /home/alex/projects/psicoacolheser/apps/frontend/node_modules\n' +
+    '        single file module\n' +
+    '          using description file: /home/alex/projects/psicoacolheser/apps/frontend/package.json (relative path: ./node_modules/tailwindcss)\n' +
+    '            no extension\n' +
+    "              /home/alex/projects/psicoacolheser/apps/frontend/node_modules/tailwindcss doesn't exist\n" +
+    '            .css\n' +
+    "              /home/alex/projects/psicoacolheser/apps/frontend/node_modules/tailwindcss.css doesn't exist\n" +
+    "        /home/alex/projects/psicoacolheser/apps/frontend/node_modules/tailwindcss doesn't exist\n" +
+    "      /home/alex/projects/psicoacolheser/apps/node_modules doesn't exist or is not a directory\n" +
+    '      looking for modules in /home/alex/projects/psicoacolheser/node_modules\n' +
+    '        single file module\n' +
+    '          using description file: /home/alex/projects/psicoacolheser/package.json (relative path: ./node_modules/tailwindcss)\n' +
+    '            no extension\n' +
+    "              /home/alex/projects/psicoacolheser/node_modules/tailwindcss doesn't exist\n" +
+    '            .css\n' +
+    "              /home/alex/projects/psicoacolheser/node_modules/tailwindcss.css doesn't exist\n" +
+    "        /home/alex/projects/psicoacolheser/node_modules/tailwindcss doesn't exist\n" +
+    '      looking for modules in /home/alex/projects/node_modules\n' +
+    '        single file module\n' +
+    '          using description file: /home/alex/projects/package.json (relative path: ./node_modules/tailwindcss)\n' +
+    '            no extension\n' +
+    "              /home/alex/projects/node_modules/tailwindcss doesn't exist\n" +
+    '            .css\n' +
+    "              /home/alex/projects/node_modules/tailwindcss.css doesn't exist\n" +
+    "        /home/alex/projects/node_modules/tailwindcss doesn't exist\n" +
+    "      /home/alex/node_modules doesn't exist or is not a directory\n" +
+    "      /home/node_modules doesn't exist or is not a directory\n" +
+    "      /node_modules doesn't exist or is not a directory\n" +
+    '      looking for modules in /home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/bin/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/node_modules\n' +
+    '        single file module\n' +
+    '          using description file: /home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/package.json (relative path: ./dist/bin/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/node_modules/tailwindcss)\n' +
+    '            no extension\n' +
+    "              /home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/bin/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/node_modules/tailwindcss doesn't exist\n" +
+    '            .css\n' +
+    "              /home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/bin/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/node_modules/tailwindcss.css doesn't exist\n" +
+    "        /home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/bin/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/dist/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules/next/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/next@15.4.6_react-dom@19.1.1_react@19.1.1__react@19.1.1/node_modules:/home/alex/projects/psicoacolheser/node_modules/.pnpm/node_modules/tailwindcss doesn't exist"
+}
+ [32m[1m✓[22m[39m Compiled successfully in 2000ms
+[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39mIt looks like you're trying to use TypeScript but do not have the required package(s) installed.
+Installing dependencies
+
+If you are not trying to use TypeScript, please remove the tsconfig.json file from your package root (and any TypeScript files in your app and pages directories).
+
+
+Installing devDependencies (pnpm):
+- @types/react
+
+[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m../..                                    |  WARN  `node_modules` is present. Lockfile only installation will make it out-of-date
+../..                                    | Progress: resolved 1, reused 0, downloaded 0, added 0
+[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m../..                                    | Progress: resolved 284, reused 0, downloaded 0, added 0, done
+
+devDependencies:
++ @types/react 19.1.10
+
+../..                                    |   +2 +
+Done in 1.2s using pnpm v10.8.0
+
+[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[?25h [37m[1m [22m[39m Linting and checking validity of types     [32m[1m✓[22m[39m Linting and checking validity of types 
+[?25l [37m[1m [22m[39m Collecting page data  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting page data  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Collecting page data     [32m[1m✓[22m[39m Collecting page data 
+[?25l [37m[1m [22m[39m Generating static pages (0/5)  [36m[    ][39m[2K[1G [37m[1m [22m[39m Generating static pages (0/5)  [36m[=   ][39m[2K[1G[?25h [32m[1m✓[22m[39m Generating static pages (5/5)
+[?25l [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[?25l [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Collecting build traces     [32m[1m✓[22m[39m Collecting build traces 
+[2K[1G[?25h [37m[1m [22m[39m Finalizing page optimization     [32m[1m✓[22m[39m Finalizing page optimization 
+
+[4mRoute (app)[24m                                 [4mSize[24m  [4mFirst Load JS[24m  [4m[24m  [4m[24m
+┌ ○ /                                    5.45 kB         [37m[1m105 kB[22m[39m
+└ ○ /_not-found                            989 B         [37m[1m101 kB[22m[39m
++ First Load JS shared by all            [37m[1m99.7 kB[22m[39m
+  ├ chunks/564-bd48312e6e09f180.js       43.7 kB
+  ├ chunks/afff970d-bbe6cc11f3da97f5.js  54.1 kB
+  └ other shared chunks (total)           1.9 kB
+
+
+○  (Static)  prerendered as static content
+
+[?25h

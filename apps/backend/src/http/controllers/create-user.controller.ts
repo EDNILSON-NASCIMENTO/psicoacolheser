@@ -23,7 +23,7 @@ export class CreateUserController {
     const params = req.body as createUserTypeDTO
     const response = await this.createUserUseCase.execute(params)
     if(response.isLeft()){
-      ErroHandler.handle(response, res)
+      return ErroHandler.handle(response, res)
     }
     return res.status(204).send()
   }

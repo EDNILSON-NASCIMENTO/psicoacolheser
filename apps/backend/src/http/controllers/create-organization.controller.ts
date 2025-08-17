@@ -24,7 +24,7 @@ export class CreateOrganizationController {
     const params = req.body as CreateOrganizationTypeDto
     const response = await this.createOrganizationUseCase.execute(params)
     if(response.isLeft()){
-      ErroHandler.handle(response, res)
+      return ErroHandler.handle(response, res)
     }
 
     return res.status(201).send(response.value)
