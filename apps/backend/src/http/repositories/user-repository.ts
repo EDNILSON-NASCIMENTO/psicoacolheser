@@ -1,9 +1,10 @@
-import { PrismaClient, UserType } from "../../generated/prisma";
+
 import { Either } from "../../core/either";
 import { UserRepository } from "../../domain/repositories/user-repository";
 import { EncoderService } from "../../domain/services/encoder-service";
 import { createUserTypeDTO } from "../../domain/DTO/create-user-dto";
 import { UserTypeDTO } from "../../domain/DTO/user.dto";
+import { PrismaClient, UserType } from "@prisma/client";
 
 
 

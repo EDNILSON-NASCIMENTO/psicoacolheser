@@ -3,12 +3,14 @@ import express, { json } from 'express'
 import env from "./env/index";
 import { userRouter } from "./http/routers/user.router";
 import { authRouter } from "./http/routers/auth.router";
+import { organizationRouter } from "./http/routers/organization.router";
 
 
 const app = express()
 app.use(json())
 app.use('/users', userRouter)
 app.use('/auth', authRouter)
+app.use('/organization', organizationRouter)
 
 
 app.get('/health', (req: Request, res: Response) => {

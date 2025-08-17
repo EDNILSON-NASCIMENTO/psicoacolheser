@@ -1,5 +1,6 @@
+import { UserType } from "@prisma/client"
 import z from "zod"
-import { UserType } from "../../generated/prisma"
+
 
 
 export const UserDTO = z.object({

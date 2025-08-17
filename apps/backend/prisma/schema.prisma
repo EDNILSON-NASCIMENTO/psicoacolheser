@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -9,14 +8,54 @@ datasource db {
 }
 
 model users {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
+  id        Int              @id @default(autoincrement())
+  email     String           @unique
   password  String
   user_type UserType
+  enderecos vinculo_endereco[]
+}
+
+model organizacao {
+  id            Int              @id @default(autoincrement())
+  identificacao String
+  razao_social  String
+  cnpj_cpf      String           @unique
+  descricao     String @db.VarChar(500)
+  enderecos     vinculo_endereco[]
+}
+
+model endereco {
+  id          Int              @id @default(autoincrement())
+  cep         String 
+  logradouro  String
+  numero      String
+  bairro      String
+  cidade      String
+  tipo        TipoEndereco
+  vinculos    vinculo_endereco[]
+}
+
+model vinculo_endereco {
+  id             Int          @id @default(autoincrement())
+
+  id_endereco    Int
+  endereco       endereco     @relation(fields: [id_endereco], references: [id])
+
+  id_organizacao Int?
+  organizacao    organizacao? @relation(fields: [id_organizacao], references: [id])
+
+  id_user        Int?
+  user           users?       @relation(fields: [id_user], references: [id])
+}
+
+enum TipoEndereco {
+  USUARIO
+  ORGANIZACAO
 }
 
 enum UserType {
-  PSICOLOGO
+  PROFISSIONAL
   PACIENTE
   ADMIN
+  VISITANTE
 }
