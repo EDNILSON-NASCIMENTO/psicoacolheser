@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import env from '../../env'
+import { UserType } from '@prisma/client'
 
 
 export function authMiddleware() {
@@ -11,11 +12,11 @@ export function authMiddleware() {
     if (!token) return res.sendStatus(401)
 
     try {
-      const payload = jwt.verify(token, env.JWT_SECRET) as { userId: number }
-      ;(req as any).user = { id: payload.userId }
+      const payload = jwt.verify(token, env.JWT_SECRET) as { userId: number, userType: UserType }
+      ;(req as any).user = { id: payload.userId, userType: payload.userType }
       next()
     } catch {
-      res.sendStatus(403)
+      res.status(403).send({message: 'not authorized'})
     }
   }
 }

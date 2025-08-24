@@ -3,6 +3,7 @@ import { UserAlreadyExistsError } from "../domain/use-cases/Errors/user-already-
 import { Left } from "../core/either";
 import { WrongCredentialsError } from "../domain/use-cases/Errors/wrong-credentials.error";
 import { CnpjOrCpfAlreadyExists } from "../domain/use-cases/Errors/cnpj-or-cpf-already-exists.error";
+import { CantCreateAddressError } from "../domain/use-cases/Errors/cant-create-adress-error";
 
 export class ErroHandler {
   static handle(error: any, res: Response) {
@@ -20,7 +21,10 @@ export class ErroHandler {
     if (errValue instanceof CnpjOrCpfAlreadyExists) {
       return res.status(403).send({ message: errValue.message, status: 403});
     }
-
+    
+    if (errValue instanceof CantCreateAddressError) {
+      return res.status(400).send({ message: errValue.message, status: 400});
+    }
 
     console.error(errValue, "erro não tratado");
     return res.status(500).send({ message: "Algo deu errado!", status: 500});

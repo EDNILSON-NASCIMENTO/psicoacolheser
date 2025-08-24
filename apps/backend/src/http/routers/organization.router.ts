@@ -7,6 +7,7 @@ import { authMiddleware } from "../middlewares/jwt.midleware";
 import { CreateOrganizationController } from "../controllers/create-organization.controller";
 import { FindOrganizationBySearchFieldsUseCase } from "../../domain/use-cases/find-organization-by-search-fields";
 import { FindOrganizationBySearchFieldsController } from "../controllers/find-organization.controller";
+import RoleValidatorMiddleware from "../middlewares/role-validator.middleware";
 
 export const organizationRouter = Router()
 
@@ -17,7 +18,7 @@ organizationRouter.get('/', authMiddleware(), zodMiddlewareValidator(searchTextD
     }
 )
 
-organizationRouter.post('/create', authMiddleware() ,zodMiddlewareValidator(createOrganizationDto, 'body')
+organizationRouter.post('/create', authMiddleware(), RoleValidatorMiddleware(['ADMIN']) ,zodMiddlewareValidator(createOrganizationDto, 'body')
  ,(req: Request, res: Response) => {
     const controller = CreateOrganizationController.getInstance()
     return controller.execute(req,res)

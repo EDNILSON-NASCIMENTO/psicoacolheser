@@ -39,13 +39,14 @@ model vinculo_endereco {
   id             Int          @id @default(autoincrement())
 
   id_endereco    Int
-  endereco       endereco     @relation(fields: [id_endereco], references: [id])
+  // Adicione onDelete: Cascade aqui
+  endereco       endereco     @relation(fields: [id_endereco], references: [id], onDelete: Cascade)
 
   id_organizacao Int?
-  organizacao    organizacao? @relation(fields: [id_organizacao], references: [id])
+  organizacao    organizacao? @relation(fields: [id_organizacao], references: [id], onDelete: Cascade)
 
   id_user        Int?
-  user           users?       @relation(fields: [id_user], references: [id])
+  user           users?       @relation(fields: [id_user], references: [id], onDelete: Cascade)
 }
 
 enum TipoEndereco {
