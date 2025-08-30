@@ -11,6 +11,7 @@ function zodMiddlewareValidator<T>(schema: ZodType<T>, property: 'body' | 'param
     const result = schema.safeParse(data)
 
     if (!result.success) {
+      console.log(result.error, 'error??')
       return res.status(400).json({
         error: 'Validation failed',
         details: result.error,

@@ -4,6 +4,7 @@ export abstract class OrganizationRepository {
     
   abstract create(params: CreateOrganizationTypeDto) : Promise<OrganizationTypeDtoWithoutAdress>
 
+
   abstract fetchOrgsByMatch(match: string) : Promise<OrganizationTypeDto[]>
 
   abstract findOrganizationById(id: number): Promise<OrganizationTypeDto | null>

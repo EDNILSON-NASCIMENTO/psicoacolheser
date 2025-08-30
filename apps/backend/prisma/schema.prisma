@@ -8,45 +8,62 @@ datasource db {
 }
 
 model users {
-  id        Int              @id @default(autoincrement())
-  email     String           @unique
+  id        Int                @id @default(autoincrement())
+  name      String
+  email     String             @unique
   password  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
   user_type UserType
   enderecos vinculo_endereco[]
+  meta_user meta_user[]
 }
 
+model meta_user {
+  id         Int    @id @default(autoincrement())
+  user_id    Int
+  meta_key   String
+  meta_value String
+  users      users  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  created_at  DateTime @default(now())
+  updated_at DateTime?
+  @@unique([user_id, meta_key])
+  @@index([user_id])
+}
+
+
 model organizacao {
-  id            Int              @id @default(autoincrement())
+  id            Int                @id @default(autoincrement())
   identificacao String
   razao_social  String
-  cnpj_cpf      String           @unique
-  descricao     String @db.VarChar(500)
+  cnpj_cpf      String             @unique
+  descricao     String             @db.VarChar(500)
   enderecos     vinculo_endereco[]
 }
 
 model endereco {
-  id          Int              @id @default(autoincrement())
-  cep         String 
-  logradouro  String
-  numero      String
-  bairro      String
-  cidade      String
-  tipo        TipoEndereco
-  vinculos    vinculo_endereco[]
+  id         Int                @id @default(autoincrement())
+  cep        String
+  logradouro String
+  numero     String
+  bairro     String
+  cidade     String
+  tipo       TipoEndereco
+  vinculos   vinculo_endereco[]
 }
 
 model vinculo_endereco {
-  id             Int          @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  id_endereco    Int
+  id_endereco Int
   // Adicione onDelete: Cascade aqui
-  endereco       endereco     @relation(fields: [id_endereco], references: [id], onDelete: Cascade)
+  endereco    endereco @relation(fields: [id_endereco], references: [id], onDelete: Cascade)
 
   id_organizacao Int?
   organizacao    organizacao? @relation(fields: [id_organizacao], references: [id], onDelete: Cascade)
 
-  id_user        Int?
-  user           users?       @relation(fields: [id_user], references: [id], onDelete: Cascade)
+  id_user Int?
+  user    users? @relation(fields: [id_user], references: [id], onDelete: Cascade)
 }
 
 enum TipoEndereco {
