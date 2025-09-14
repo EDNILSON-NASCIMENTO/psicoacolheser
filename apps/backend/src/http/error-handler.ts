@@ -4,13 +4,15 @@ import { Left } from "../core/either";
 import { WrongCredentialsError } from "../domain/use-cases/Errors/wrong-credentials.error";
 import { CnpjOrCpfAlreadyExists } from "../domain/use-cases/Errors/cnpj-or-cpf-already-exists.error";
 import { CantCreateAddressError } from "../domain/use-cases/Errors/cant-create-adress-error";
+import { NotFoundError } from "../domain/use-cases/Errors/not-found-error";
+import { ScheduleAlreadyExistsError } from "../domain/use-cases/Errors/schedule-already-exists-error";
 
 export class ErroHandler {
   static handle(error: any, res: Response) {
     // Caso seja um Left, pegar o valor interno
     const errValue = error instanceof Left ? error.value : error;
 
-    if (errValue instanceof UserAlreadyExistsError) {
+    if (errValue instanceof UserAlreadyExistsError || ScheduleAlreadyExistsError) {
       return res.status(400).send({ message: errValue.message, status: 400});
     }
 
@@ -26,6 +28,11 @@ export class ErroHandler {
       return res.status(400).send({ message: errValue.message, status: 400});
     }
 
+    if (errValue instanceof NotFoundError) {
+      return res.status(404).send({ message: errValue.message, status: 404});
+    }
+
+    
     console.error(errValue, "erro não tratado");
     return res.status(500).send({ message: "Algo deu errado!", status: 500});
   }

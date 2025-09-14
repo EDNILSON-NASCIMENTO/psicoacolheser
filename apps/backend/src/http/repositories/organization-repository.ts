@@ -4,7 +4,7 @@ import { EncoderService } from "../../domain/services/encoder-service";
 import { createUserTypeDTO } from "../../domain/DTO/create-user-dto";
 import { UserTypeDTO } from "../../domain/DTO/user.dto";
 import { OrganizationRepository } from "../../domain/repositories/organization-repository";
-import { CreateOrganizationTypeDto, OrganizationTypeDto, OrganizationTypeDtoWithoutAdress } from "../../domain/DTO/organization-dto";
+import { CreateOrganizationTypeDto, LinkProfessionalWithOrgDTO, NewLinkProfessionalWithOrgDTO, OrganizationTypeDto, OrganizationTypeDtoWithoutAdress } from "../../domain/DTO/organization-dto";
 import { PrismaClient } from "@prisma/client";
 
 
@@ -101,5 +101,13 @@ export class PrismaOrganizationRepository implements OrganizationRepository{
     }))
   }
   }
+
+  async create_link_professional_with_org(params: NewLinkProfessionalWithOrgDTO): Promise<LinkProfessionalWithOrgDTO> {
+    const link = await this.prisma.vinculo_profissional_organizacao.create({
+      data: params,
+    })
+    return link
+  }
+
 
 }
