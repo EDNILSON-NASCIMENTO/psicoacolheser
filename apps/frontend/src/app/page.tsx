@@ -1,18 +1,33 @@
-// apps/frontend/src/app/page.tsx
-import { AuthLayout } from '@/app/components/AuthLayout';
-import { AuthForm } from '@/app/components/AuthForm';
-import { Logo } from '@/app/components/Logo';
+import Header from '@/app/components/Header';
+import Hero from '@/app/components/Hero';
+import About from '@/app/components/About';
+import Stats from '@/app/components/Stats';
+import Services from '@/app/components/Services';
+import Appointment from '@/app/components/Appointment';
+import Doctors from '@/app/components/Doctors';
+import Faq from '@/app/components/Faq';
+import Testimonials from '@/app/components/Testimonials';
+import Gallery from '@/app/components/Gallery';
+import Contact from '@/app/components/Contact';
+import Footer from '@/app/components/Footer';
 
-// Lembre-se de que a imagem do logo deve ser 'logo.jpg' e estar na pasta public
-const logoImage = '/logo.jpg'; 
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <AuthLayout>
-      <div className="flex flex-col items-center">
-        <Logo src={logoImage} alt="AcolheSer Logo" />
-        <AuthForm />
-      </div>
-    </AuthLayout>
+    <>
+      <Header />
+      <main className="main">
+        <Hero />
+        <About />
+        {/* <Stats /> */}
+        <Services />
+        <Appointment />
+        <Doctors />
+        <Faq />
+        <Testimonials />
+        {/* <Gallery /> */}
+        <Contact />
+      </main>
+      <Footer />
+    </>
   );
 }

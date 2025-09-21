@@ -1,6 +1,5 @@
 
 
 > backend@1.0.0 build /var/www/html/psicoacolheser/apps/backend
-> echo 'Build do backend não necessário' 
+> tsc --project ./tsconfig.json
 
-Build do backend não necessário

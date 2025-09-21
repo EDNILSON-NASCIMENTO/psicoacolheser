@@ -4,10 +4,33 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.8.0"
+  "packageManager": "pnpm@10.8.0",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.0.0",
+    "@tailwindcss/postcss": "^4.1.12",
+    "aos": "latest",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-simple-lightbox": "^1.0.26",
+    "swiper": "latest"
+  },
+  "devDependencies": {
+    "@types/aos": "^3.0.7",
+    "@types/react": "^19.1.11",
+    "@types/react-dom": "^19.1.8",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-import": "^16.1.1",
+    "turbo": "^2.5.6"
+  }
 }
