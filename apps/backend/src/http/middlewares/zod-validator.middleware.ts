@@ -1,19 +1,28 @@
 import { Request, Response, NextFunction } from 'express'
 import { ZodType } from 'zod'
 
-function zodMiddlewareValidator<T>(schema: ZodType<T>, property: 'body' | 'params') {
-  return (req: Request, res: Response, next: NextFunction) => {
+interface ValidatedRequest extends Request {
+  validatedQuery?: any
+}
+
+function zodMiddlewareValidator<T>(schema: ZodType<T>, property: 'body' | 'params' | 'query') {
+  return (req: ValidatedRequest, res: Response, next: NextFunction) => {
     const data = req[property]
     const result = schema.safeParse(data)
 
     if (!result.success) {
+      console.log(result.error, 'error??')
       return res.status(400).json({
         error: 'Validation failed',
         details: result.error,
       })
     }
 
-    req[property] = result.data
+    if(property === 'query'){
+      req.validatedQuery = result.data
+    } else {
+      req[property] = result.data
+    }
 
     next()
   }

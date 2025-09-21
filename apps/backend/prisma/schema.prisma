@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -9,14 +8,113 @@ datasource db {
 }
 
 model users {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
+  id        Int                @id @default(autoincrement())
+  name      String
+  email     String             @unique
   password  String
+  createdAt DateTime           @default(now())
+  updatedAt DateTime?
   user_type UserType
+  enderecos vinculo_endereco[]
+  meta_user meta_user[]
+
+  agendamentos_como_profissional agenda_profissional[]              @relation(name: "agendamentos_como_profissional")
+  agendamentos_como_paciente     agenda_profissional[]              @relation(name: "agendamentos_como_paciente")
+  // Um usuário pode estar em vários vínculos
+  vinculos                       vinculo_profissional_organizacao[] @relation("UserVinculo")
+  // Um usuário pode ser admin de UM vínculo (1:1)
+  adminVinculo                   vinculo_profissional_organizacao?  @relation("AdminVinculo")
+}
+
+model meta_user {
+  id         Int       @id @default(autoincrement())
+  user_id    Int
+  meta_key   String
+  meta_value String
+  users      users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+
+  @@unique([user_id, meta_key])
+  @@index([user_id])
+}
+
+model vinculo_profissional_organizacao {
+  id              Int         @id @default(autoincrement())
+  user_id         Int
+  organization_id Int
+  admin_id        Int         @unique
+  // Relação com usuário profissional
+  user            users       @relation("UserVinculo", fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  // Relação com organização
+  organization    organizacao @relation(fields: [organization_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  // Relação com usuário como admin
+  admin           users       @relation("AdminVinculo", fields: [admin_id], references: [id])
+  created_at      DateTime    @default(now())
+
+  @@unique([user_id, organization_id])
+  @@index([organization_id])
+}
+
+model organizacao {
+  id                               Int                                @id @default(autoincrement())
+  identificacao                    String
+  razao_social                     String
+  cnpj_cpf                         String                             @unique
+  descricao                        String                             @db.VarChar(500)
+  enderecos                        vinculo_endereco[]
+  vinculo_profissional_organizacao vinculo_profissional_organizacao[]
+}
+
+model agenda_profissional {
+  id              Int                 @id @default(autoincrement())
+  profissional_id Int
+  paciente_id     Int?
+  horario         DateTime
+  status          statusAgendaHorario @default(LIVRE)
+  profissional users  @relation(fields: [profissional_id], references: [id], name: "agendamentos_como_profissional")
+  paciente     users?  @relation(fields: [paciente_id], references: [id], name: "agendamentos_como_paciente")
+  usersId      Int?
+}
+
+model endereco {
+  id         Int                @id @default(autoincrement())
+  cep        String
+  logradouro String
+  numero     String
+  bairro     String
+  cidade     String
+  tipo       TipoEndereco
+  vinculos   vinculo_endereco[]
+}
+
+model vinculo_endereco {
+  id Int @id @default(autoincrement())
+
+  id_endereco Int
+  // Adicione onDelete: Cascade aqui
+  endereco    endereco @relation(fields: [id_endereco], references: [id], onDelete: Cascade)
+
+  id_organizacao Int?
+  organizacao    organizacao? @relation(fields: [id_organizacao], references: [id], onDelete: Cascade)
+
+  id_user Int?
+  user    users? @relation(fields: [id_user], references: [id], onDelete: Cascade)
+}
+
+enum TipoEndereco {
+  USUARIO
+  ORGANIZACAO
+}
+
+enum statusAgendaHorario {
+  LIVRE
+  OCUPADO
 }
 
 enum UserType {
-  PSICOLOGO
+  PROFISSIONAL
   PACIENTE
   ADMIN
+  VISITANTE
 }

@@ -5,6 +5,7 @@ import { ErroHandler } from "../error-handler";
 import { PrismaUserRepository } from "../repositories/user-repository";
 import { BcryptEncoderService } from "../services/bcrypt-encoder.service";
 import { prismaService } from "../services/prisma.service";
+import { newUserTypeDto } from "../../domain/DTO/user.dto";
 
 export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase){}
@@ -20,10 +21,10 @@ export class CreateUserController {
   }
 
   async execute(req: Request, res: Response){
-    const params = req.body as createUserTypeDTO
+    const params = req.body as newUserTypeDto
     const response = await this.createUserUseCase.execute(params)
     if(response.isLeft()){
-      ErroHandler.handle(response, res)
+      return ErroHandler.handle(response, res)
     }
     return res.status(204).send()
   }
