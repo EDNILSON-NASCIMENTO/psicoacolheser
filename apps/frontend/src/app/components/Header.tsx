@@ -1,12 +1,17 @@
+// apps/frontend/src/app/components/Header.tsx
 'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAuth } from './AuthProvider'; // 1. Importar o hook de autenticação
 
 export default function Header() {
   const [isMobileNavActive, setIsMobileNavActive] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+
+  // 2. Obter o estado de autenticação e a função de logout
+  const { isAuthenticated, logout } = useAuth();
 
   const toggleMobileNav = () => {
     setIsMobileNavActive(!isMobileNavActive);
@@ -21,10 +26,19 @@ export default function Header() {
     if (isMobileNavActive) {
       setIsMobileNavActive(false); // Fecha a nav mobile ao clicar em um link
     }
+    setActiveDropdown(null); // Fecha qualquer dropdown aberto
+  };
+
+  // 3. Criar função de handler para o logout
+  const handleLogout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    logout();
+    handleLinkClick(); // Fecha menus
   };
 
   return (
     <header id="header" className="header sticky-top">
+      {/* --- Topbar (sem alterações) --- */}
       <div className="topbar d-flex align-items-center">
         <div className="container d-flex justify-content-center justify-content-md-between">
           <div className="contact-info d-flex align-items-center">
@@ -44,9 +58,10 @@ export default function Header() {
         </div>
       </div>
 
+      {/* --- Branding e Navmenu (com alterações) --- */}
       <div className="branding d-flex align-items-center">
         <div className="container position-relative d-flex align-items-center justify-content-between">
-          <Link href="/" className="logo d-flex align-items-center me-auto">
+          <Link href="/" className="logo d-flex align-items-center me-auto" onClick={handleLinkClick}>
             <Image src="/assets/img/logo_pas.jpeg" alt="Logo PsicoAcolheSer" className="img-fluid" width={54} height={54} />
             <h1 className="sitename">PsicoAcolheSer</h1>
           </Link>
@@ -57,30 +72,34 @@ export default function Header() {
               <li><Link href="#about" onClick={handleLinkClick}>Sobre</Link></li>
               <li><Link href="#services" onClick={handleLinkClick}>Serviços</Link></li>
               <li><Link href="#doctors" onClick={handleLinkClick}>Equipe</Link></li>
-              <li><Link href="#appointment" onClick={handleLinkClick}>Agendamento</Link></li>
-              <li className={`dropdown ${activeDropdown === 'main-dropdown' ? 'dropdown-active' : ''}`}>
-                <a href="#" onClick={(e) => toggleDropdown(e, 'main-dropdown')}>
-                  <span>Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i>
-                </a>
-                <ul className={`${activeDropdown === 'main-dropdown' ? 'dropdown-active' : ''}`}>
-                  <li><a href="#">Dropdown 1</a></li>
-                  <li className={`dropdown ${activeDropdown === 'deep-dropdown' ? 'dropdown-active' : ''}`}>
-                    <a href="#" onClick={(e) => toggleDropdown(e, 'deep-dropdown')}>
-                      <span>Deep Dropdown</span> <i className="bi bi-chevron-down toggle-dropdown"></i>
-                    </a>
-                    <ul className={`${activeDropdown === 'deep-dropdown' ? 'dropdown-active' : ''}`}>
-                      <li><a href="#">Deep Dropdown 1</a></li>
-                      <li><a href="#">Deep Dropdown 2</a></li>
-                      <li><a href="#">Deep Dropdown 3</a></li>
-                      <li><a href="#">Deep Dropdown 4</a></li>
-                      <li><a href="#">Deep Dropdown 5</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Dropdown 2</a></li>
-                  <li><a href="#">Dropdown 3</a></li>
-                  <li><a href="#">Dropdown 4</a></li>
-                </ul>
+
+              {/* 4. AJUSTE: Link de Agendamento dinâmico */}
+              <li>
+                <Link 
+                  href={isAuthenticated ? '/dashboard' : '/login'} 
+                  onClick={handleLinkClick}
+                >
+                  Agendamento
+                </Link>
               </li>
+
+              {/* 5. AJUSTE: Dropdown dinâmico (Minha Conta ou nada) */}
+              {isAuthenticated ? (
+                // Se LOGADO, mostrar "Minha Conta"
+                <li className={`dropdown ${activeDropdown === 'user-dropdown' ? 'dropdown-active' : ''}`}>
+                  <a href="#" onClick={(e) => toggleDropdown(e, 'user-dropdown')}>
+                    <span>Minha Conta</span> <i className="bi bi-chevron-down toggle-dropdown"></i>
+                  </a>
+                  <ul className={`${activeDropdown === 'user-dropdown' ? 'dropdown-active' : ''}`}>
+                    <li><Link href="/dashboard" onClick={handleLinkClick}>Meu Painel</Link></li>
+                    <li><a href="#" onClick={handleLogout}>Sair</a></li>
+                  </ul>
+                </li>
+              ) : (
+                // Se DESLOGADO, não mostrar o dropdown
+                <></>
+              )}
+              
               <li><Link href="#contact" onClick={handleLinkClick}>Contato</Link></li>
             </ul>
             <i 
@@ -89,7 +108,19 @@ export default function Header() {
             ></i>
           </nav>
 
-          <Link className="cta-btn d-none d-sm-block" href="#appointment" onClick={handleLinkClick}>Marque um agendamento</Link>
+          {/* 6. AJUSTE PRINCIPAL: Botão CTA dinâmico */}
+          {isAuthenticated ? (
+            // Se LOGADO, o botão leva ao painel
+            <Link className="cta-btn d-none d-sm-block" href="/dashboard" onClick={handleLinkClick}>
+              Meu Painel
+            </Link>
+          ) : (
+            // Se DESLOGADO, o botão solicita o login
+            <Link className="cta-btn d-none d-sm-block" href="/login" onClick={handleLinkClick}>
+              Entrar / Agendar
+            </Link>
+          )}
+
         </div>
       </div>
     </header>
